@@ -1,0 +1,22 @@
+---
+version: '2'
+services:
+  jenkins:
+    image: castawaylabs/semaphore
+    container_name: semaphore
+    environment:
+      - MONGODB_URL=mongodb://mongo/semaphore
+      - REDIS_HOST=redis
+    ports:
+      - 80:80
+    links:
+      - redis:redisio
+      - mongodb:mongo
+  redis:
+    image: redis
+    container_name: redisio
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
